@@ -7,11 +7,11 @@ AddEventHandler('ykaa_gardener:giveReward', function()
     
     if xPlayer then
         local castka = math.random(50, 80)
-        xPlayer.addMoney(castka)
+        xPlayer.addMoney(price)
         
         TriggerClientEvent('ox_lib:notify', _source, {
             title = 'Gardener', 
-            description = 'You got paid. $'..castka, 
+            description = 'You got paid. $'..price, 
             type = 'success', 
             position = 'top-right', 
             icon = 'money-bill-wave'

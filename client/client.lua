@@ -56,11 +56,10 @@ function StartGardeningJob()
         useWhileDead = false,
         canCancel = true,
         disable = { car = true, move = true, combat = true },
-        anim = {
-            dict = 'missheistdockssetup1ig_5@base',
-            clip = 'workers_talking_loop_worker1',
-            flag = 49
-        },
+            anim = {
+                dict = 'misscarsteal4@actor',
+                clip = 'actor_berating_loop',
+}
     })
 
     if success then 

@@ -6,12 +6,12 @@ Config.ProgressTime = 5000
 Config.Gardener = {
     Ped = {
         model = "s_m_m_cntrybar_01",
-        coords = vec4(1219.8287, -1038.8408, 8.3379, 297.6415),
+        coords = vec4(-1219.8793, -1038.8022, 8.3386, 285.7380),
     },
     Vehicle = {
         enabled = true,
         model = "burrito",
-        spawnCoords = vec4(1228.2515, -1029.4132, 8.2507, 105.7099)
+        spawnCoords = vec4(-1231.0570, -1030.6942, 8.2701, 109.5755)
     },
     Blip = {
         sprite = 85,

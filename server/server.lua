@@ -6,12 +6,12 @@ AddEventHandler('ykaa_gardener:giveReward', function()
     local xPlayer = ESX.GetPlayerFromId(_source)
     
     if xPlayer then
-        local castka = math.random(50, 80)
+        local price = math.random(150, 300)
         xPlayer.addMoney(price)
         
         TriggerClientEvent('ox_lib:notify', _source, {
-            title = 'Gardener', 
-            description = 'You got paid. $'..price, 
+            title = 'Zahradník', 
+            description = 'Dostal jsi výplatu $'..price, 
             type = 'success', 
             position = 'top-right', 
             icon = 'money-bill-wave'

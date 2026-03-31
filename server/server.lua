@@ -10,8 +10,8 @@ AddEventHandler('ykaa_gardener:giveReward', function()
         xPlayer.addMoney(price)
         
         TriggerClientEvent('ox_lib:notify', _source, {
-            title = 'Zahradník', 
-            description = 'Dostal jsi výplatu $'..price, 
+            title = 'Gardener', 
+            description = 'You got price $'..price, 
             type = 'success', 
             position = 'top-right', 
             icon = 'money-bill-wave'

@@ -84,7 +84,7 @@ function GenerateNewTask()
     if jobZone then jobZone:remove() end
 
     local randomIndex = math.random(1, #Config.Locations)
-    if #Config.Lokace > 1 then
+    if #Config.Locations > 1 then
         while randomIndex == lastLocationIndex do
             randomIndex = math.random(1, #Config.Locations)
         end
@@ -156,7 +156,7 @@ function ResetJob()
     lastLocationIndex = nil
     if DoesBlipExist(jobBlip) then RemoveBlip(jobBlip) end
     if jobZone then jobZone:remove() end
-    if Config.Zahradnik.Vehicle.enabled and DoesEntityExist(spawnedVehicle) then
+    if Config.Gardener.Vehicle.enabled and DoesEntityExist(spawnedVehicle) then
         DeleteVehicle(spawnedVehicle)
         spawnedVehicle = nil
     end

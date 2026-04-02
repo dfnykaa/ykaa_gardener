@@ -15,7 +15,7 @@ Config.Gardener = {
     },
     Blip = {
         sprite = 85,
-        color = 56,
+        color = 2,
         scale = 0.8,
         label = "Gardener"
     }

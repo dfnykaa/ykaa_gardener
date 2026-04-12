@@ -1,2 +1,10 @@
 # ykaa_gardener
-Gardeber Brigade
+
+# FrameWork
+- ESX/QB
+
+# Depencies
+- ox_lib
+
+# Previvew
+https://streamable.com/7pmzko

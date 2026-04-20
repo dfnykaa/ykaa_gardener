@@ -50,6 +50,16 @@ CreateThread(function()
 end)
 
 function StartGardeningJob()
+    local playerPed = PlayerPedId()
+    local pedCoords = GetEntityCoords(spawnedPed)
+    
+    TaskTurnPedToFaceCoord(playerPed, pedCoords.x, pedCoords.y, pedCoords.z, 1000)
+    Wait(1000) 
+
+    local animDict = 'misscarsteal4@actor'
+    local animClip = 'actor_berating_loop'
+    lib.requestAnimDict(animDict)
+
     local success = lib.progressBar({
         duration = 5000,
         label = 'You negotiate a job...',
@@ -57,8 +67,8 @@ function StartGardeningJob()
         canCancel = true,
         disable = { car = true, move = true, combat = true },
         anim = {
-            dict = 'missheistdockssetup1ig_5@base',
-            clip = 'workers_talking_loop_worker1',
+            dict = animDict,
+            clip = animClip,
             flag = 49
         },
     })
@@ -83,14 +93,19 @@ function GenerateNewTask()
     if DoesBlipExist(jobBlip) then RemoveBlip(jobBlip) end
     if jobZone then jobZone:remove() end
 
-    local randomIndex = math.random(1, #Config.Locations)
-    if #Config.Lokace > 1 then
+    local locations = Config.Locations
+    local randomIndex = math.random(1, #locations)
+    
+    if #locations > 1 then
         while randomIndex == lastLocationIndex do
-            randomIndex = math.random(1, #Config.Locations)
+            randomIndex = math.random(1, #locations)
         end
     end
+    
     lastLocationIndex = randomIndex
-    local randomLoc = Config.Locations[randomIndex]
+    local randomLoc = locations[randomIndex]
+
+    TriggerServerEvent('ykaa_gardener:setNextLocation', randomLoc.coords)
 
     jobBlip = AddBlipForCoord(randomLoc.coords.xyz)
     SetBlipSprite(jobBlip, 1)
@@ -120,6 +135,8 @@ function GenerateNewTask()
 end
 
 function FinishWork()
+    TriggerServerEvent('ykaa_gardener:startWork')
+
     local animDict = "amb@world_human_gardener_leaf_blower@idle_a"
     lib.requestAnimDict(animDict)
 
@@ -142,9 +159,8 @@ function FinishWork()
     })
 
     if success then
-        TriggerServerEvent('ykaa_zahradnik:giveReward')
-        lib.notify({title = 'Gardener', description = 'Money paid out! Continue to the next location.', type = 'success'})
-        
+        TriggerServerEvent('ykaa_gardener:giveReward')
+        lib.notify({title = 'Gardener', description = 'Money paid out!', type = 'success'})
         GenerateNewTask()
     else
         lib.notify({description = 'You stopped vacuuming....', type = 'error'})
@@ -156,7 +172,7 @@ function ResetJob()
     lastLocationIndex = nil
     if DoesBlipExist(jobBlip) then RemoveBlip(jobBlip) end
     if jobZone then jobZone:remove() end
-    if Config.Zahradnik.Vehicle.enabled and DoesEntityExist(spawnedVehicle) then
+    if Config.Gardener.Vehicle.enabled and DoesEntityExist(spawnedVehicle) then
         DeleteVehicle(spawnedVehicle)
         spawnedVehicle = nil
     end
